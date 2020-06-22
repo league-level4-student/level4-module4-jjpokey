@@ -10,4 +10,8 @@ public class Surgeon extends Doctor{ //DONE
 		System.out.println("surgeons works");
 		return true;
 }
+	
+	public Object makesHouseCall() {
+		return false;
+}
 }

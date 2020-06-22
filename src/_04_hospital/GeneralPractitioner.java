@@ -7,9 +7,12 @@ public class GeneralPractitioner extends Doctor{ //done
 		super();
 	}
 	
-	public Object makesHouseCall() {
+	public Object makesHouseCalls() {
 		System.out.println("practitioner works");
 		return true;
+}
+	public Object performsSurgery() {
+		return false;
 }
 
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Random;
 
 import junit.framework.TestCase;
 
@@ -16,6 +17,9 @@ import junit.framework.TestCase;
  */
 
 public class HospitalTest extends TestCase {
+	
+	Random rdoctor = new Random();
+	int rd = 0;
 
 	Hospital testHospital = new Hospital();
 
@@ -34,7 +38,7 @@ public class HospitalTest extends TestCase {
 	}
 
 	/* Fix asserts one at a time */
-	public void testDoctorsHaveSpecialties() throws Exception {
+	public void testDoctorsHaveSpecialties() throws Exception { //done
 		Doctor testDoctor = new Doctor();
 		assertEquals(false, testDoctor.performsSurgery());
 
@@ -48,7 +52,7 @@ public class HospitalTest extends TestCase {
 	}
 
 	/* A doctor has a list of patients */
-	public void testAssignDoctor() throws Exception {
+	public void testAssignDoctor() throws Exception { //done
 		Doctor testDoctor = new GeneralPractitioner();
 		testDoctor.assignPatient(new Patient());
 		assertEquals(1, testDoctor.getPatients().size());
@@ -59,7 +63,7 @@ public class HospitalTest extends TestCase {
 	}
 
 	/* When you check a patient's pulse, they feel cared for */
-	public void testCheckPulse() throws Exception {
+	public void testCheckPulse() throws Exception { //done
 		Patient testPatient = new Patient();
 		assertEquals(false, testPatient.feelsCaredFor());
 		testPatient.checkPulse();
@@ -92,18 +96,41 @@ public class HospitalTest extends TestCase {
 		} catch (DoctorFullException dfe) {
 			assertTrue(true);
 		}
+		
 assertTrue(testDoctor.getPatients().size() == 3);
 	}
 
 	public void test8Patients() throws Exception {
+		Doctor test = new Doctor();
 		// TODO: add 3 doctors to hospital
+		for(int i = 0; i < 3; i++) {
+			
+			rd = rdoctor.nextInt(2);
+			
+			if(rd == 0) {
+				test = new Surgeon();
+			}
+			
+			if(rd == 1) {
+				test = new GeneralPractitioner();
+			}
+			
+			testHospital.addDoctor(test);
+			
+		}
 
 		// TODO: add 8 patients to hospital
-
+		for(int i = 0; i < 8; i++) {
+			Patient p = new Patient();
+			testHospital.addPatient(p);
+		}
 		// hospital assigns patients to doctors
 		testHospital.assignPatientsToDoctors();
 		// hospital.getDoctors shows doctors have 3, 3, 2 patients
 		List<Doctor> testDoctors = testHospital.getDoctors();
+		System.out.println(testDoctors.get(0).getPatients().size());
+		System.out.println(testDoctors.get(1).getPatients().size());
+		System.out.println(testDoctors.get(2).getPatients().size());
 		assertEquals(3, testDoctors.get(0).getPatients().size());
 		assertEquals(3, testDoctors.get(1).getPatients().size());
 		assertEquals(2, testDoctors.get(2).getPatients().size());

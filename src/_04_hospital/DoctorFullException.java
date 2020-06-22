@@ -1,5 +1,5 @@
 package _04_hospital;
 
-public class DoctorFullException extends Exception { //done????
+public class DoctorFullException extends Exception { //done???
 
 }
